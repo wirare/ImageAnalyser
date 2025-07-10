@@ -1,0 +1,2 @@
+[submodule "lib/Tensorium_lib"]
+	url = git@github.com:wirare/Tensorium_lib-ML.git
