@@ -6,7 +6,7 @@
 /*   By: ellanglo <ellanglo@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 22:18:02 by ellanglo          #+#    #+#             */
-/*   Updated: 2025/07/09 23:23:13 by ellanglo         ###   ########.fr       */
+/*   Updated: 2025/07/10 16:50:35 by wirare           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "Tensorium/Functionnal/FunctionnalRG.hpp"
@@ -97,11 +97,11 @@ inline float swish_grad_scl(float x)
 	return (sig + (x * sig) * (1 - sig));
 }
 
-inline void swish_grad(Tensor2& T)
+inline Tensor2 swish_grad(Tensor2& T)
 {
 	Matrix<float> T_mat = tensor_to_matrix(T);
 
 	T_mat = T_mat.foreach(swish_grad_simd, swish_grad_scl);
 
-	T = matrix_to_tensor(T_mat);
+	return (matrix_to_tensor(T_mat));
 }

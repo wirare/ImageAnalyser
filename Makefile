@@ -1,6 +1,7 @@
 # Compiler and flags
 CXX := clang++
-CXXFLAGS := -std=c++17 -mavx2 -mfma
+CXXFLAGS := -std=c++17 -mavx2 -mfma `pkg-config --cflags opencv4`
+LDFLAGS = `pkg-config --libs opencv4`
 
 # Directories
 SRCDIR := srcs
@@ -20,7 +21,7 @@ all: $(TARGET)
 # Link object files into final binary
 $(TARGET): $(OBJFILES)
 	@echo "Linking $(TARGET)..."
-	$(CXX) $(OBJFILES) -o $(TARGET)
+	$(CXX) $(OBJFILES) -o $(TARGET) $(LDFLAGS)
 
 # Compile .cpp to .o
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp | $(OBJDIR)
